@@ -1,6 +1,6 @@
 # Backyard Bird Classification & Detection (FeederWatch Automation)
 
-![Feeder Bird](images/example_bird.jpg)
+![Feeder Bird](images/cover.jpg)
 
 *A species classification system for backyard feeder birds.*
 
