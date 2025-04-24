@@ -74,11 +74,15 @@ The classifier was trained using a filtered and curated subset of the NABirds da
 ### 3. Evaluation & Interpretability
 - **Validation Accuracy**: 91.82%  
 - **Macro F1 Score**: 0.913  
-- **Grad-CAM**: ![INSERT IMAGE](grad-cam.jpg) 
+- **Grad-CAM**: 
+
+![GRAD-CAM](images/grad-cam.png) 
   - Showed focus on full-body features for correct predictions
   - Errors often focused too narrowly on bird heads or background noise 
 
-- **LIME**: ![INSERT IMAGE](lime.jpg)
+- **LIME**:
+
+![LIME](images/lime.png)
   - Correct predictions emphasized anatomical features
   - Misclassifications highlighted visual clutter or occlusion
 
