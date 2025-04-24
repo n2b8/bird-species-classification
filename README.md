@@ -72,21 +72,23 @@ The classifier was trained using a filtered and curated subset of the NABirds da
   - Mixed precision for faster training
 
 ### 3. Evaluation & Interpretability
+
 - **Validation Accuracy**: 91.82%  
 - **Macro F1 Score**: 0.913  
-- **Grad-CAM**: 
 
-![GRAD-CAM](images/grad-cam.png) 
-  - Showed focus on full-body features for correct predictions
-  - Errors often focused too narrowly on bird heads or background noise 
+**Grad-CAM**
 
-- **LIME**:
+![Grad-CAM](images/grad-cam.png)
+
+- Correct predictions: Model focused on full-body features like wings, tail, and chest.
+- Misclassifications: Attention was often limited to the head or misdirected to the background.
+
+**LIME**
 
 ![LIME](images/lime.png)
-  - Correct predictions emphasized anatomical features
-  - Misclassifications highlighted visual clutter or occlusion
 
----
+- Correct predictions: Highlighted regions aligned well with key bird anatomy.
+- Misclassifications: Emphasis was placed on irrelevant parts of the image — branches, shadows, or cluttered backgrounds.
 
 ## Deployment
 
