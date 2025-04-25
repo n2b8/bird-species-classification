@@ -140,6 +140,7 @@ Based on evaluation and deployment testing, the following steps could improve sy
 ## File Structure
 
 - **[index.ipynb](index.ipynb)**: Full analysis notebook following CRISP-DM
+- **[images](/images)**: Directory for saved images
 
 ---
 
