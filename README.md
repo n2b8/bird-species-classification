@@ -67,32 +67,35 @@ The classifier was trained using a filtered and curated subset of the NABirds da
 - **Final Model**: EfficientNet-B7 with transfer learning (ImageNet pretrained).
 - **Export Format**: ONNX, optimized for Raspberry Pi inference with ONNX Runtime.
 - **Training Pipeline**:
-  - ~~Weighted sampling for class balance~~
-  - Early stopping based on validation accuracy
-  - Mixed precision for faster training
+    - Used class weights (not weighted sampling) to mitigate imbalance
+    - Early stopping based on validation accuracy
+    - Mixed precision for faster training
+
 
 ### 3. Evaluation & Interpretability
 
-- **Validation Accuracy**: 91.82%  
-- **Macro F1 Score**: 0.913  
+- **Validation Accuracy**: 92.5%
+- **Macro F1 Score**: 0.920
 
 **Grad-CAM**
 
 ![Grad-CAM](images/grad-cam.png)
 
-- Correct predictions: Model focused on full-body features like wings, tail, and chest.
-- Misclassifications: Attention was often limited to the head or misdirected to the background.
+- Correct classifications: The model consistently focused on the full bird—wings, body, tail—capturing key identification features.
+- Misclassifications: Model attention was limited to heads or backgrounds, often missing distinguishing traits.
 
 **LIME**
 
 ![LIME](images/lime.png)
 
-- Correct predictions: Highlighted regions aligned well with key bird anatomy.
-- Misclassifications: Emphasis was placed on irrelevant parts of the image — branches, shadows, or cluttered backgrounds.
+- Correct classifications: Saliency maps emphasized meaningful parts of the bird’s anatomy.
+- Misclassifications: LIME highlighted non-informative areas like branches, shadows, or clutter.
+
+These interpretability tools helped confirm that model success depends heavily on visibility of the full bird and minimal background distractions.
 
 ## Deployment
 
-The final model was deployed as part of a complete AI-powered birdwatching system on a Raspberry Pi 5 with a Hailo-8 AI accelerator. The system runs continuously and processes an RTSP camera feed in real time.
+This system runs fully autonomously and has greatly improved the consistency of my FeederWatch observations. It captures timestamped visits, classifies species with high confidence, and eliminates the need for manual logging in most cases.
 
 The full deployment code is a work in progress and is available here:  
 **[github.com/n2b8/birdwatcher](https://github.com/n2b8/birdwatcher)**
