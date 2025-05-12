@@ -71,11 +71,12 @@ The classifier was trained using a filtered and curated subset of the NABirds da
     - Early stopping based on validation accuracy
     - Mixed precision for faster training
 
-
 ### 3. Evaluation & Interpretability
 
 - **Validation Accuracy**: 92.5%
 - **Macro F1 Score**: 0.920
+- **Validation Split**: Stratified 80/20 across 134 classes, preserving class balance.
+- **Evaluation Strategy**: Used class-balanced weights and ONNX-exported models to reflect final deployment conditions.
 
 **Grad-CAM**
 
@@ -83,6 +84,7 @@ The classifier was trained using a filtered and curated subset of the NABirds da
 
 - Correct classifications: The model consistently focused on the full bird—wings, body, tail—capturing key identification features.
 - Misclassifications: Model attention was limited to heads or backgrounds, often missing distinguishing traits.
+- These findings were especially useful for identifying weak spots in the model’s generalization to occluded or off-angle birds.
 
 **LIME**
 
@@ -90,12 +92,15 @@ The classifier was trained using a filtered and curated subset of the NABirds da
 
 - Correct classifications: Saliency maps emphasized meaningful parts of the bird’s anatomy.
 - Misclassifications: LIME highlighted non-informative areas like branches, shadows, or clutter.
+- Interpretation revealed that some failures occurred not due to species confusion, but due to the model overemphasizing background artifacts.
 
 These interpretability tools helped confirm that model success depends heavily on visibility of the full bird and minimal background distractions.
 
+---
+
 ## Deployment
 
-This system runs fully autonomously and has greatly improved the consistency of my FeederWatch observations. It captures timestamped visits, classifies species with high confidence, and eliminates the need for manual logging in most cases.
+This system runs fully autonomously and has greatly improved the consistency of my FeederWatch observations. It captures timestamped visits, classifies species with high confidence, and drastically reduces species identification errors prior to logging in FeederWatch.
 
 The full deployment code is a work in progress and is available here:  
 **[github.com/n2b8/birdwatcher](https://github.com/n2b8/birdwatcher)**
@@ -104,6 +109,9 @@ The full deployment code is a work in progress and is available here:
 - **Detection**: YOLOv8 (Hailo-optimized) runs in real time to detect birds.
 - **Classification**: EfficientNet-B7 ONNX model classifies detected frames.
 - **Web Dashboard**: Flask app with image logs, species charts, and a review interface.
+  - `/` — Visit gallery showing all high-confidence classifications
+  - `/review` — Interface for confirming or rejecting lower-confidence predictions
+  - `/stats` — Includes species frequency bar charts and hour-by-day visit heatmap
 - **Database**: SQLite stores all visit metadata and prediction confidence.
 - **Notifications**: Telegram bot alerts for high-confidence visits.
 - **Backups**: Daily image and database syncs to MinIO (S3-compatible).
@@ -128,6 +136,10 @@ Based on evaluation and deployment testing, the following steps could improve sy
 3. **Deploy Beyond Backyard**:
    - Pilot in community parks or schools to increase usage and feedback.
    - Integrate with broader FeederWatch or iNaturalist APIs for validation.
+
+4. **Model Monitoring**:
+   - Integrate feedback loop from /review interface for retraining.
+   - Periodically audit underperforming classes via Grad-CAM/LIME.
 
 ---
 
