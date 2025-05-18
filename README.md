@@ -102,7 +102,7 @@ These interpretability tools helped confirm that model success depends heavily o
 
 This system runs fully autonomously and has greatly improved the consistency of my FeederWatch observations. It captures timestamped visits, classifies species with high confidence, and drastically reduces species identification errors prior to logging in FeederWatch.
 
-The full deployment code is a work in progress and is available here:  
+The deployed system is live and continuously improving. Source code and latest updates available at:
 **[github.com/n2b8/birdwatcher](https://github.com/n2b8/birdwatcher)**
 
 ### System Architecture
@@ -154,10 +154,14 @@ Based on evaluation and deployment testing, the following steps could improve sy
 
 ## File Structure
 
-- **[index.ipynb](index.ipynb)**: Full analysis notebook following CRISP-DM
 - **[images](/images)**: Directory for saved images
+- **[index.ipynb](index.ipynb)**: Full analysis notebook following CRISP-DM
+- **[presentation.pdf](presentation.pdf)**: Keynote slide deck
 
----
+### External Files
+
+- **[Custom Trained Model (EfficientNet-B7)](https://www.kaggle.com/models/jakemccaig/backyard-birds-efficientnet-b7)**: Final ONNX model trained on feeder bird subset
+- **[Birds Dataset (NABirds Subset)](https://www.kaggle.com/datasets/jakemccaig/backyard-feeder-birds-nabirds-subset)**: Filtered NABirds subset used for training and evaluation
 
 ## Requirements
 
